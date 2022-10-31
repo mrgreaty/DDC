@@ -1,0 +1,49 @@
+clc;
+clear all;
+close all;
+data = [1 0 1 0 0 0 1 1 0];
+bitrate = 1;
+% polar
+T=length(data)/bitrate;
+n=200;
+N=n*length(data);
+dt=T/N;
+t = 0:dt:T;
+x = zeros(1,length(t)); %output signal
+for i = 0:length(data)-1
+if data (i+1) == 1
+x(i*n+1:(i+0.5)*n) = 1;
+x((i+0.5)*n+1:(i+1)*n) = 0;
+else
+x(i*n+1:(i+1)*n) = -1;
+x((i+0.5)*n+1: (i+1)*n) = 0;
+end
+end
+figure;
+subplot(2,1,1);
+plot (t,x, 'linewidth',3);
+axis([0 t(end) -1.1 1.1])
+grid on;
+title(['polar RZ: [' num2str(data)']' );
+%unipolar
+T = length(data)/bitrate;
+n = 200;
+N = n*length (data);
+dt = T/N;
+t = 0:dt:T;
+x = zeros(1,length(t)); %output signal
+for i = 0:length(data)-1
+if data (i+1) == 1
+x(i*n+1:(i+0.5)*n) = 1;
+x((i+0.5)*n+1:(i+1)*n) = 0;
+else
+x(i*n+1:(i+1)*n) = 0;
+x((i+0.5)*n+1: (i+1)*n) = 0;
+end
+end
+figure;
+subplot(2,1,2);
+plot (t,x, 'linewidth',3);
+axis([0 t(end) -0.1 1.1])
+grid on;
+title(['unipolar RZ: [' num1str(data)']' );
