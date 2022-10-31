@@ -1,0 +1,19 @@
+clc;
+clear all;
+close all;
+symbols = (1:7);
+prob = [0.25,0.25,0.125,0.125,0.125,0.0625,0.0625];
+[dict,avglen] = huffmandict(symbols,prob,2,'min');
+dict(:,2) = cellfun(@num2str,dict(:,2),'UniformOutput',false);
+display(dict);
+display(avglen);
+entropy =0;
+for i = 1:7;
+entropy = entropy + ((prob(i))*(log2(1/prob(i))));
+end
+display('entropy:');
+display(entropy);
+display('avglen or hcap');
+display(avglen);
+display('efficiency');
+display(100*(entropy/avglen))
